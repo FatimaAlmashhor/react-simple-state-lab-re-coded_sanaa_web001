@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
-import Cell from './Cell' ;
-export default class Matrix extends Component {
-  
-  genRow = (vals) => {
-    return vals.map(val => <Cell className="cell" />) // replace me and render a cell component instead!
+import React, { Component } from "react";
+
+export class Cell extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      color: props.value,
+    };
   }
-  
-  genMatrix = () => {
-    return this.props.values.map(rowVals => <div className="row">{this.genRow(rowVals)}</div>)
-  }
-  
+  handleClick = () => {
+    this.setState({ color: "#333" });
+  };
   render() {
     return (
-      <div id="matrix">
-        {this.genMatrix()}
-      </div>
-    )
+      <div
+        className="cell"
+        style={{ backgroundColor: this.state.color }}
+        onClick={this.handleClick}
+      ></div>
+    );
   }
-  
 }
 
-Matrix.defaultProps = {
-   values: (() => {
-    const defRow = ['#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00', '#F00']
-    return (new Array(10).fill(defRow))
-  })()
-}
+export default Cell;
